@@ -9,6 +9,7 @@ public class MusicManager : MonoBehaviour
     public const float ClipBPM = 150;
 
     public float ElapsedTime { get; private set; }
+    public int LoopAmount { get; private set; }
 
     public float ElapsedBeats
     {
@@ -17,7 +18,6 @@ public class MusicManager : MonoBehaviour
             return ElapsedTime / 60.0f * ClipBPM;
         }
     }
-    private int _loopAmount;
 
     [SerializeField] private AudioClip _defaultClip;
     [SerializeField] private TextMeshPro test;
@@ -32,7 +32,7 @@ public class MusicManager : MonoBehaviour
 
         _previousTime = 0;
         ElapsedTime = 0;
-        _loopAmount = 0;
+        LoopAmount = 0;
 
         _audioSource.clip = _defaultClip;
         _audioSource.Play();
@@ -45,15 +45,19 @@ public class MusicManager : MonoBehaviour
 
         if (_previousTime > currentTime)
         {
-            // has looped
-            _loopAmount++;
+            OnLoop();
         }
 
-        ElapsedTime = currentTime + (_loopAmount * _defaultClip.length);
+        ElapsedTime = currentTime + (LoopAmount * _defaultClip.length);
 
         _previousTime = currentTime;
 
         test.text = $"time: {ElapsedTime:##.000}\n" +
                     $"beat: {ElapsedBeats:##.000}";
+    }
+
+    private void OnLoop()
+    {
+        LoopAmount++;
     }
 }
