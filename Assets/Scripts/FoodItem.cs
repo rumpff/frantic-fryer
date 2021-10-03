@@ -10,4 +10,6 @@ public class FoodItem : ScriptableObject
     public float FryTime = 1;
     public AnimationCurve ThrowCurve;
     public AnimationCurve FryCurve;
+
+    public GameObject PhysicsFood;
 }

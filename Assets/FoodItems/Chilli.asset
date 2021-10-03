@@ -90,3 +90,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  PhysicsFood: {fileID: 7399609230341233569, guid: b35fb742fa80ce24b80de231b1fd1d5a, type: 3}

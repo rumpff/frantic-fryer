@@ -117,3 +117,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  PhysicsFood: {fileID: 7399609230341233569, guid: 353e13a5d25709540976968a525d6996, type: 3}

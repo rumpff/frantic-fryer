@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
@@ -17,8 +18,10 @@ public class Stove : MonoBehaviour
     [SerializeField] private AudioClip _frySuccsesClip, _fryFailedClip;
     [SerializeField] private AudioSource _audioSource;
 
+    [SerializeField] private Transform _pan;
     [SerializeField] private Canvas _progressCanvas;
     [SerializeField] private Image _progressBar;
+    [SerializeField] private ParticleSystem _fire;
 
     [Space(25)] [SerializeField] private Image _resultImage;
     [SerializeField] private Sprite _iconSucces, _iconFailed;
@@ -26,6 +29,8 @@ public class Stove : MonoBehaviour
     [SerializeField] private Vector3 _iconEndRotate;
     [SerializeField] private float _iconDuration;
     [SerializeField] private AnimationCurve _iconPosCurve, _iconRotCurve, _iconFadeCurve;
+
+    private Vector3 _panBaseLoc;
 
     public bool IsOccupied
     {
@@ -40,6 +45,9 @@ public class Stove : MonoBehaviour
         {
             _progressBar.transform.parent.gameObject.SetActive(value);
             _isFrying = value;
+
+            if (value == true)
+                _fire.Play();
         }
     }
 
@@ -48,6 +56,8 @@ public class Stove : MonoBehaviour
     {
         _baseBarPos = _progressBar.rectTransform.anchoredPosition;
         _resultImage.gameObject.SetActive(false);
+        _panBaseLoc = _pan.position;
+        _fire.Stop();
 
         Empty();
     }
@@ -56,6 +66,7 @@ public class Stove : MonoBehaviour
     {
         IsOccupied = false;
         IsFrying = false;
+        _fire.Stop();
     }
 
     public void SetProgressbar(float progress)
@@ -81,6 +92,13 @@ public class Stove : MonoBehaviour
     {
         _audioSource.PlayOneShot(_frySuccsesClip);
         StartCoroutine(IconAnimation(_iconSucces));
+
+        Sequence panFlip = DOTween.Sequence();
+
+        panFlip.Append(_pan.DOMoveY(_panBaseLoc.y + 1f, 0.1f)).SetEase(Ease.Linear);
+        panFlip.Append(_pan.DOMoveY(_panBaseLoc.y, 0.1f)).SetEase(Ease.Linear);
+
+        panFlip.Play();
     }
 
     public void FryFailed()

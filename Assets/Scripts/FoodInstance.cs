@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using JetBrains.Annotations;
 using UnityEngine;
+using Random = System.Random;
 
 public class FoodInstance : MonoBehaviour
 {
@@ -66,11 +67,23 @@ public class FoodInstance : MonoBehaviour
         {
             // Hit
             Stove.FrySucces();
+
+            var obj = Instantiate(Dingetje.Food.PhysicsFood);
+            var rb = obj.GetComponent<Rigidbody>();
+
+            obj.transform.position = transform.position;
+            rb.AddForce(new Vector3()
+            {
+                x = UnityEngine.Random.Range(-600, 600),
+                y = UnityEngine.Random.Range(600, 1200),
+                z = UnityEngine.Random.Range(-600, 600)
+            });
         }
         else
         {
             // Miss
             Stove.FryFailed();
+            GameManager.Instance.LoseHeart();
         }
 
         GameManager.Instance.EradicateFoodObject(this);

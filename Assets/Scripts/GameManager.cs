@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class GameManager : MonoBehaviour
@@ -21,11 +23,18 @@ public class GameManager : MonoBehaviour
 
     private int _currentPattern;
     private float _musicSpeed;
+    private int _hearts;
+
+    private bool _gameIsNotOver = true;
 
     void Start()
     {
         Instance = this;
-        _currentPattern = 8;
+        _currentPattern = -1;
+        _hearts = 3;
+        
+        _gameIsNotOver = true;
+
         SetMusicSpeed(0.85f);
         NextPattern();
     }
@@ -44,7 +53,7 @@ public class GameManager : MonoBehaviour
 
         _musicManager.PlayClip(pattern.BGMClip);
 
-        while (patternId == _musicManager.LoopAmount)
+        while (patternId == _musicManager.LoopAmount && _gameIsNotOver)
         {
             float patternTime = _musicManager.ElapsedBeats - patternLength * patternId;
 
@@ -59,6 +68,41 @@ public class GameManager : MonoBehaviour
 
             FoodUpdateEvent?.Invoke(patternTime);
             yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator GameOverUpdate()
+    {
+        bool waiting = true;
+
+        while (waiting)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+                waiting = false;
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        SceneManager.LoadScene(0);
+    }
+
+    public void LoseHeart()
+    {
+        _hearts--;
+        HeartContainer.Instance.LoseAHeart();
+
+        if (_hearts <= 0)
+        {
+            // Oei
+            _gameIsNotOver = false;
+            GameOverContainer.Instance.gameObject.SetActive(true);
+
+
+            _musicManager._audioSource.DOPitch(0, 0.5f);
+            StartCoroutine(GameOverUpdate());
         }
     }
 
