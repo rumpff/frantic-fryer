@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private const int patternLength = 16;
+    public const int patternLength = 16;
 
     [SerializeField] private FoodPattern[] _foodPatterns;
     [SerializeField] private FoodPattern _testPattern;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         _currentPattern = -1;
-        SetMusicSpeed(1);
+        SetMusicSpeed(0.85f);
         NextPattern();
     }
 
@@ -69,7 +69,10 @@ public class GameManager : MonoBehaviour
         {
             // Loop and increase speed
             _currentPattern = 0;
-            AddMusicSpeed(0.1f);
+            AddMusicSpeed(0.15f);
+
+            _musicManager.LoopAmount = 0;
+            _musicManager.ElapsedTime = 0;
         }
         else
         {
@@ -138,7 +141,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < _activeFoods.Count; i++)
             {
                 FoodInstance food = _activeFoods[i];
-                float d = (food.RealHitTime + food.Dingetje.Food.FryTime) - patternTime;
+                float d = food.RealHitTime;
                 if (d < savedDistance)
                 {
                     savedId = i;

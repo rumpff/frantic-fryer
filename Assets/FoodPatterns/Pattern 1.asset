@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Pattern 1
   m_EditorClassIdentifier: 
   FoodList:
-  - Timing: 0
-    Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
   - Timing: 4
     Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
-  - Timing: 8
+  - Timing: 12
     Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
   BGMClip: {fileID: 8300000, guid: f917538688bebf9429c1e0991178ed66, type: 3}

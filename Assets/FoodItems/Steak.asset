@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b65efb1aee31e154e9ccd4110f05c185, type: 3}
-  m_Name: Egg
+  m_Name: Steak
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7399609230341233569, guid: 74b6a8c7229ed3a4a91c39afb3601f83, type: 3}
-  ThrowTime: 2
-  FryTime: 2
+  ThrowTime: 3
+  FryTime: 3
   ThrowCurve:
     serializedVersion: 2
     m_Curve:
@@ -54,20 +54,65 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
+      inSlope: 1
+      outSlope: Infinity
+      tangentMode: 97
+      weightedMode: 2
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.44498226
+    - serializedVersion: 3
+      time: 0.23333333
+      value: 0
+      inSlope: 0.18789814
+      outSlope: 0.18789814
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.23396808
+      outWeight: 0.80114293
+    - serializedVersion: 3
+      time: 0.3333333
+      value: 0.32961425
+      inSlope: 17.588861
+      outSlope: Infinity
+      tangentMode: 97
+      weightedMode: 3
+      inWeight: 0.09657655
+      outWeight: 0.36551636
+    - serializedVersion: 3
+      time: 0.566666
+      value: 0.33333
+      inSlope: 0.5069873
+      outSlope: 0.5069873
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.28735027
+      outWeight: 0.57421523
+    - serializedVersion: 3
+      time: 0.666666
+      value: 0.6666667
+      inSlope: 39.409077
+      outSlope: Infinity
+      tangentMode: 97
+      weightedMode: 3
+      inWeight: 0.030552248
+      outWeight: 0.37409425
+    - serializedVersion: 3
+      time: 0.899999
+      value: 0.6666667
+      inSlope: 0.13837953
+      outSlope: 0.13837953
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.29424384
+      outWeight: 0.8740106
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: 17.761517
+      outSlope: 17.761517
       tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
+      weightedMode: 3
+      inWeight: 0.04770106
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

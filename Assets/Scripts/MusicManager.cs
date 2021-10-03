@@ -10,8 +10,8 @@ public class MusicManager : MonoBehaviour
 
     public readonly float ClipBPM = 150;
 
-    public float ElapsedTime { get; private set; }
-    public int LoopAmount { get; private set; }
+    public float ElapsedTime { get; set; }
+    public int LoopAmount { get; set; }
 
     public float ElapsedBeats
     {
@@ -51,7 +51,7 @@ public class MusicManager : MonoBehaviour
             OnLoop();
         }
 
-        ElapsedTime = currentTime + (LoopAmount * _defaultClip.length);
+        ElapsedTime = currentTime + (LoopAmount * (60.0f / ClipBPM * GameManager.patternLength));
 
         _previousTime = currentTime;
 

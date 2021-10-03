@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be259365621aa445bb8e2cc7200b647, type: 3}
+  m_Name: Pattern 8
+  m_EditorClassIdentifier: 
+  FoodList:
+  - Timing: 0
+    Food: {fileID: 11400000, guid: 2623b4d2d9e43ef49ad099e15d236fb1, type: 2}
+  - Timing: 1.5
+    Food: {fileID: 11400000, guid: 2623b4d2d9e43ef49ad099e15d236fb1, type: 2}
+  - Timing: 3
+    Food: {fileID: 11400000, guid: 2623b4d2d9e43ef49ad099e15d236fb1, type: 2}
+  - Timing: 4.5
+    Food: {fileID: 11400000, guid: 2623b4d2d9e43ef49ad099e15d236fb1, type: 2}
+  - Timing: 6
+    Food: {fileID: 11400000, guid: 2623b4d2d9e43ef49ad099e15d236fb1, type: 2}
+  - Timing: 7.5
+    Food: {fileID: 11400000, guid: 2623b4d2d9e43ef49ad099e15d236fb1, type: 2}
+  - Timing: 8.5
+    Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
+  BGMClip: {fileID: 8300000, guid: f917538688bebf9429c1e0991178ed66, type: 3}

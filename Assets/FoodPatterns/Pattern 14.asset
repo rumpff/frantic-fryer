@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6be259365621aa445bb8e2cc7200b647, type: 3}
-  m_Name: Pattern 2
+  m_Name: Pattern 14
   m_EditorClassIdentifier: 
   FoodList:
   - Timing: 0
+    Food: {fileID: 11400000, guid: 92ef7f3ae1f32c14e91dc4fa5e4d5313, type: 2}
+  - Timing: 1
+    Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
+  - Timing: 2
     Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
   - Timing: 4
-    Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
-  - Timing: 8
-    Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
+    Food: {fileID: 11400000, guid: 92ef7f3ae1f32c14e91dc4fa5e4d5313, type: 2}
+  - Timing: 6
+    Food: {fileID: 11400000, guid: 2623b4d2d9e43ef49ad099e15d236fb1, type: 2}
   BGMClip: {fileID: 8300000, guid: f917538688bebf9429c1e0991178ed66, type: 3}

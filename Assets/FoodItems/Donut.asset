@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b65efb1aee31e154e9ccd4110f05c185, type: 3}
-  m_Name: Egg
+  m_Name: Donut
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7399609230341233569, guid: 74b6a8c7229ed3a4a91c39afb3601f83, type: 3}
   ThrowTime: 2
@@ -52,22 +52,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: -0.0015029907
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
+      inSlope: Infinity
+      outSlope: 265.53958
+      tangentMode: 5
+      weightedMode: 2
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.0029897632
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
+      time: 1.0038452
+      value: 1.0101852
+      inSlope: 172.40063
+      outSlope: Infinity
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.004696346
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -8,7 +8,7 @@ using UnityEngine;
 public class FoodInstance : MonoBehaviour
 {
     public const float MaxJump = 4;
-    public const float TimingOvershoot = 0.2f;
+    public const float TimingOvershoot = 0.15f;
     public const float EarlyMiss = -0.35f;
 
     private IFoodState currentState;
@@ -17,6 +17,8 @@ public class FoodInstance : MonoBehaviour
     public float RealHitTime;
     public Vector3 SpawnPos;
     public Stove Stove;
+
+    public AudioSource WindAudio, FryAudio, PanAudio;
 
     public void InitFood(FoodDingeje food, float realHitTime, Stove stove, Vector3 spawnPos)
     {
@@ -64,11 +66,13 @@ public class FoodInstance : MonoBehaviour
         {
             // Hit
             Debug.Log("hit!");
+            Stove.FrySucces();
         }
         else
         {
             // Miss
             Debug.Log("miss!");
+            Stove.FryFailed();
         }
 
         GameManager.Instance.EradicateFoodObject(this);
@@ -87,6 +91,7 @@ public class FoodInstance : MonoBehaviour
         void IFoodState.StateEnter(FoodInstance foodInstance)
         {
             Instance = foodInstance;
+            Instance.WindAudio.Play();
         }
 
         void IFoodState.StateUpdate(float patternTime)
@@ -102,13 +107,15 @@ public class FoodInstance : MonoBehaviour
 
             Instance.transform.position = position;
 
+            Instance.WindAudio.volume = t;
+
             if (t >= 1)
                 Instance.ChangeState(new FryState());
         }
 
         void IFoodState.StateExit()
         {
-
+            Instance.WindAudio.Stop();
         }
     }
 
@@ -124,22 +131,29 @@ public class FoodInstance : MonoBehaviour
 
             Instance.transform.position = Stove.transform.position;
             Stove.IsFrying = true;
+
+            Instance.FryAudio.Play();
+            Instance.PanAudio.Play();
         }
 
         void IFoodState.StateUpdate(float patternTime)
         {
             float t = (patternTime - Instance.Dingetje.Timing - Instance.Dingetje.Food.ThrowTime) / Instance.Dingetje.Food.FryTime;
-            Stove.SetProgressbar(Instance.Dingetje.Food.FryCurve.Evaluate(t));
+            float tCurve = Instance.Dingetje.Food.FryCurve.Evaluate(t);
+            Stove.SetProgressbar(tCurve);
 
             if (MusicManager.Instance.ElapsedTime > Instance.RealHitTime + FoodInstance.TimingOvershoot)
             {
                 Instance.Hit(MusicManager.Instance.ElapsedTime);
             }
+
+            Instance.FryAudio.pitch = 1 + (tCurve * 1f);
         }
 
         void IFoodState.StateExit()
         {
             Stove.IsFrying = false;
+            Instance.FryAudio.Stop();
         }
     }
 }
