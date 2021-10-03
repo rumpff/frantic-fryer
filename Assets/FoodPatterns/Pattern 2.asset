@@ -19,3 +19,4 @@ MonoBehaviour:
     Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
   - Timing: 9
     Food: {fileID: 11400000, guid: d725e3ee035d63c4f80f507c82ede4e4, type: 2}
+  BGMClip: {fileID: 8300000, guid: 7d50bc3a990458d4aa22de73afdbbc0e, type: 3}
