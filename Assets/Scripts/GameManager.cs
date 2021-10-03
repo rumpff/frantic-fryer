@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
         int patternId = _musicManager.LoopAmount;
         int spawnCount = 0;
 
+        _musicManager.PlayClip(pattern.BGMClip);
+
         while (patternId == _musicManager.LoopAmount)
         {
             float patternTime = _musicManager.ElapsedBeats - patternLength * patternId;

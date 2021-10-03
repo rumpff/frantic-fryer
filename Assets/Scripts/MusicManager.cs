@@ -60,6 +60,12 @@ public class MusicManager : MonoBehaviour
                     $"beat: {ElapsedBeats:##.000}";
     }
 
+    public void PlayClip(AudioClip newClip)
+    {
+        _audioSource.clip = newClip;
+        _audioSource.Play();
+    }
+
     private void OnLoop()
     {
         LoopAmount++;
