@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using TMPro;
 using UnityEngine;
 
 public class Metronome : MonoBehaviour
@@ -8,6 +9,7 @@ public class Metronome : MonoBehaviour
     [SerializeField] private Vector3 _swingAngle;
     [SerializeField] private AudioSource _tickAudioSource;
     [SerializeField] private Transform _swing;
+    [SerializeField] private TextMeshPro _bpmLabel;
 
     private int prevBeat;
 
@@ -36,5 +38,7 @@ public class Metronome : MonoBehaviour
             y = _swingAngle.y * Mathf.Sin(elapsedBeats * Mathf.PI),
             z = _swingAngle.z * Mathf.Sin(elapsedBeats * Mathf.PI)
         };
+
+        _bpmLabel.text = $"{MusicManager.Instance.ClipBPM * MusicManager.Instance._audioSource.pitch:000}";
     }
 }

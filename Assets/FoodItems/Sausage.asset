@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65efb1aee31e154e9ccd4110f05c185, type: 3}
   m_Name: Sausage
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 7399609230341233569, guid: 74b6a8c7229ed3a4a91c39afb3601f83, type: 3}
+  Prefab: {fileID: 7399609230341233569, guid: ca8608abb0b4a53468624c80f4ea96d6, type: 3}
   ThrowTime: 1.5
   FryTime: 1.5
   ThrowCurve:

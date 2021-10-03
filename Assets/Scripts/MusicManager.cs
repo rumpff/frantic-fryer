@@ -22,7 +22,6 @@ public class MusicManager : MonoBehaviour
     }
 
     [SerializeField] private AudioClip _defaultClip;
-    [SerializeField] private TextMeshPro test;
     public AudioSource _audioSource; // Audiosource for music clips
 
     private float _previousTime;
@@ -54,10 +53,6 @@ public class MusicManager : MonoBehaviour
         ElapsedTime = currentTime + (LoopAmount * (60.0f / ClipBPM * GameManager.patternLength));
 
         _previousTime = currentTime;
-
-        test.text = $"loop: {LoopAmount}\n" +
-                    $"time: {ElapsedTime:##.000}\n" +
-                    $"beat: {ElapsedBeats:##.000}";
     }
 
     public void PlayClip(AudioClip newClip)

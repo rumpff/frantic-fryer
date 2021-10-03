@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public const int patternLength = 16;
 
     [SerializeField] private FoodPattern[] _foodPatterns;
-    [SerializeField] private FoodPattern _testPattern;
     [SerializeField] private MusicManager _musicManager;
     [SerializeField] private Stove[] _stoves;
     [SerializeField] private Transform _foodSpawnPos;
@@ -26,7 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        _currentPattern = -1;
+        _currentPattern = 8;
         SetMusicSpeed(0.85f);
         NextPattern();
     }

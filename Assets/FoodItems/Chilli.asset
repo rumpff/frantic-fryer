@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65efb1aee31e154e9ccd4110f05c185, type: 3}
   m_Name: Chilli
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 7399609230341233569, guid: 74b6a8c7229ed3a4a91c39afb3601f83, type: 3}
+  Prefab: {fileID: 7399609230341233569, guid: 86639a6ece1fb6c4daa90d42cc62a8a9, type: 3}
   ThrowTime: 2
   FryTime: 2
   ThrowCurve:

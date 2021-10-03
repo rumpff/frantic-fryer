@@ -65,13 +65,11 @@ public class FoodInstance : MonoBehaviour
         if (Mathf.Abs(d) <= TimingOvershoot)
         {
             // Hit
-            Debug.Log("hit!");
             Stove.FrySucces();
         }
         else
         {
             // Miss
-            Debug.Log("miss!");
             Stove.FryFailed();
         }
 
