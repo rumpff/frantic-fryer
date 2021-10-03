@@ -62,8 +62,11 @@ public class MusicManager : MonoBehaviour
 
     public void PlayClip(AudioClip newClip)
     {
+        _audioSource.Stop();
         _audioSource.clip = newClip;
         _audioSource.Play();
+
+        _previousTime = -1;
     }
 
     private void OnLoop()

@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         {
             // Loop and increase speed
             _currentPattern = 0;
-            AddMusicSpeed(0.1f);
+            //AddMusicSpeed(0.1f);
         }
         else
         {
