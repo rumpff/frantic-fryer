@@ -6,7 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
-    public const float ClipBPM = 150;
+    public static MusicManager Instance;
+
+    public readonly float ClipBPM = 150;
 
     public float ElapsedTime { get; private set; }
     public int LoopAmount { get; private set; }
@@ -21,13 +23,14 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private AudioClip _defaultClip;
     [SerializeField] private TextMeshPro test;
-    private AudioSource _audioSource; // Audiosource for music clips
+    public AudioSource _audioSource; // Audiosource for music clips
 
     private float _previousTime;
 
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         _audioSource = GetComponent<AudioSource>();
 
         _previousTime = 0;
@@ -52,12 +55,14 @@ public class MusicManager : MonoBehaviour
 
         _previousTime = currentTime;
 
-        test.text = $"time: {ElapsedTime:##.000}\n" +
+        test.text = $"loop: {LoopAmount}\n" +
+                    $"time: {ElapsedTime:##.000}\n" +
                     $"beat: {ElapsedBeats:##.000}";
     }
 
     private void OnLoop()
     {
         LoopAmount++;
+        GameManager.Instance.NextPattern();
     }
 }

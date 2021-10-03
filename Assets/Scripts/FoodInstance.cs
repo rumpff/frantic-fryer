@@ -2,28 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class FoodInstance : MonoBehaviour
 {
-    private const float MaxJump = 4;
-    private const float TimingOvershoot = 0.15f;
+    public const float MaxJump = 4;
+    public const float TimingOvershoot = 0.2f;
+    public const float EarlyMiss = -0.35f;
 
     private IFoodState currentState;
-    public FoodItem Item { get; private set; }
+    public FoodDingeje Dingetje { get; private set; }
 
-    public float StartPos;
+    public float RealHitTime;
     public Vector3 SpawnPos;
     public Stove Stove;
 
-    public void InitFood(FoodItem item, float startPos, Stove stove, Vector3 spawnPos)
+    public void InitFood(FoodDingeje food, float realHitTime, Stove stove, Vector3 spawnPos)
     {
-        Item = item;
-        StartPos = startPos;
+        Dingetje = food;
+        RealHitTime = realHitTime;
         SpawnPos = spawnPos;
         Stove = stove;
 
-        //stove.IsOccupied = true;
+        stove.IsOccupied = true;
         transform.position = spawnPos;
 
         currentState = new ThrowState();
@@ -48,9 +50,28 @@ public class FoodInstance : MonoBehaviour
         currentState.StateEnter(this);
     }
 
-    public void OnFlip()
+    public void Hit(float time)
     {
+        float d = time - RealHitTime;
 
+        if (d < EarlyMiss)
+        {
+            // Too early, cancel
+            return;
+        }
+
+        if (Mathf.Abs(d) <= TimingOvershoot)
+        {
+            // Hit
+            Debug.Log("hit!");
+        }
+        else
+        {
+            // Miss
+            Debug.Log("miss!");
+        }
+
+        GameManager.Instance.EradicateFoodObject(this);
     }
 
     public interface IFoodState
@@ -58,7 +79,6 @@ public class FoodInstance : MonoBehaviour
         void StateEnter(FoodInstance foodInstance);
         void StateUpdate(float patternTime);
         void StateExit();
-        void Flip();
     }
 
     private class ThrowState : IFoodState
@@ -71,11 +91,11 @@ public class FoodInstance : MonoBehaviour
 
         void IFoodState.StateUpdate(float patternTime)
         {
-            float t = (patternTime - Instance.StartPos) / Instance.Item.ThrowTime;
+            float t = (patternTime - Instance.Dingetje.Timing) / Instance.Dingetje.Food.ThrowTime;
 
             Vector3 position = new Vector3()
             {
-                y = Instance.Item.ThrowCurve.Evaluate(t) * MaxJump,
+                y = Instance.Stove.transform.position.y + Instance.Dingetje.Food.ThrowCurve.Evaluate(t) * MaxJump,
                 x = Mathf.Lerp(Instance.SpawnPos.x, Instance.Stove.transform.position.x, t),
                 z = Mathf.Lerp(Instance.SpawnPos.z, Instance.Stove.transform.position.z, t)
             };
@@ -87,11 +107,6 @@ public class FoodInstance : MonoBehaviour
         }
 
         void IFoodState.StateExit()
-        {
-
-        }
-
-        void IFoodState.Flip()
         {
 
         }
@@ -108,22 +123,23 @@ public class FoodInstance : MonoBehaviour
             Stove = foodInstance.Stove;
 
             Instance.transform.position = Stove.transform.position;
-            // Set stove to frying
+            Stove.IsFrying = true;
         }
 
         void IFoodState.StateUpdate(float patternTime)
         {
-            float t = (patternTime - Instance.StartPos - Instance.Item.ThrowTime) / Instance.Item.FryTime;
+            float t = (patternTime - Instance.Dingetje.Timing - Instance.Dingetje.Food.ThrowTime) / Instance.Dingetje.Food.FryTime;
+            Stove.SetProgressbar(Instance.Dingetje.Food.FryCurve.Evaluate(t));
+
+            if (MusicManager.Instance.ElapsedTime > Instance.RealHitTime + FoodInstance.TimingOvershoot)
+            {
+                Instance.Hit(MusicManager.Instance.ElapsedTime);
+            }
         }
 
         void IFoodState.StateExit()
         {
-
-        }
-
-        void IFoodState.Flip()
-        {
-
+            Stove.IsFrying = false;
         }
     }
 }
