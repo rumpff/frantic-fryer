@@ -134,6 +134,8 @@ public class FoodInstance : MonoBehaviour
 
             Instance.FryAudio.Play();
             Instance.PanAudio.Play();
+
+            CameraShaker.Instance.AddScreenshake(0.5f);
         }
 
         void IFoodState.StateUpdate(float patternTime)
