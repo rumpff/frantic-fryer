@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private int _hearts;
 
     private bool _gameIsNotOver = true;
+    private bool RELOADTHESCENE = false;
 
     void Start()
     {
@@ -41,7 +42,20 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        ReadInput();
+        ReadInput();;
+
+        if (!_gameIsNotOver)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                string currentSceneName = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene(currentSceneName);
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
+        }
     }
 
     public IEnumerator PatternUpdate(FoodPattern pattern)
@@ -71,23 +85,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator GameOverUpdate()
-    {
-        bool waiting = true;
-
-        while (waiting)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-                waiting = false;
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-                Application.Quit();
-
-            yield return new WaitForEndOfFrame();
-        }
-
-        SceneManager.LoadScene(0);
-    }
 
     public void LoseHeart()
     {
@@ -102,7 +99,6 @@ public class GameManager : MonoBehaviour
 
 
             _musicManager._audioSource.DOPitch(0, 0.5f);
-            StartCoroutine(GameOverUpdate());
         }
     }
 
